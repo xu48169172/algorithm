@@ -23,15 +23,24 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
 		memset(head, 0, sizeof(struct ListNode));
 	realhead = head;
 	while( l1 || l2) {
-		num = l1->val + l2->val + c;
+		if (l1 && l2) {
+			num = l1->val + l2->val + c;
+			l1 = l1->next;
+			l2 = l2->next;
+		} else if (l1) {
+			num = l1->val;
+			l1 = l1->next;
+		} else if (l2) {
+			num = l2->val;
+			l2 = l2->next;
+		}
+
 		if (num > 9) {
 			c = 1;
 			num = num % 10;
 		} else
 			c = 0;
 		head->val = num;
-		l1 = l1->next;
-		l2 = l2->next;
 		if ((l1 == NULL) && (l2 == NULL))
 			head->next = NULL;
 		else {
@@ -68,7 +77,7 @@ int main()
 {
 	struct ListNode *head;
 	struct ListNode *l1 = initNumbers(5);
-	struct ListNode *l2 = initNumbers(5);
+	struct ListNode *l2 = initNumbers(2);
 #if 0
 	for(head=l1;head;head=head->next)
 		printf("val=%d\n",head->val);
