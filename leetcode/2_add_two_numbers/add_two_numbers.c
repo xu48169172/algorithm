@@ -66,17 +66,16 @@ struct ListNode* initNumbers(int len)
 	if (head != NULL)
 		memset(head, 0, sizeof(struct ListNode));
 	realhead = head;
+	head->val=len + 5;
+	head=head->next;
 	while(len) {
 		//printf("len=%d\n",len);
+		head = malloc(sizeof(struct ListNode));
+		if (head != NULL)
+			memset(head, 0, sizeof(struct ListNode));
 		head->val = len + 5;
+		head = head->next;
 		len--;
-		if (len) {
-			temp = malloc(sizeof(struct ListNode));
-			if (temp != NULL)
-				memset(temp, 0, sizeof(struct ListNode));
-			head->next = temp;
-			head = head->next;
-		}
 	}
 	return realhead;
 }
